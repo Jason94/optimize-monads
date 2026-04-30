@@ -1,0 +1,31 @@
+; disassembly for TEST-DIRECT-CONCAT
+; Size: 28 bytes. Origin: #xB8010CAAF6                        ; TEST-DIRECT-CONCAT
+; AF6:       488B15C3FFFFFF   MOV RDX, [RIP-61]               ; "test"
+; AFD:       488B3DC4FFFFFF   MOV RDI, [RIP-60]               ; "concat"
+; B04:       B904000000       MOV ECX, 4
+; B09:       FF7508           PUSH QWORD PTR [RBP+8]
+; B0C:       FF253E99A4FE     JMP [RIP-22767298]              ; COALTON/STRING::|INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>|
+
+; disassembly for TEST-LAMBDA-CONCAT
+; Size: 28 bytes. Origin: #xB8010CA7C6                        ; TEST-LAMBDA-CONCAT
+; C6:       488B15C3FFFFFF   MOV RDX, [RIP-61]                ; "test"
+; CD:       488B3DC4FFFFFF   MOV RDI, [RIP-60]                ; "concat"
+; D4:       B904000000       MOV ECX, 4
+; D9:       FF7508           PUSH QWORD PTR [RBP+8]
+; DC:       FF256E9CA4FE     JMP [RIP-22766482]               ; COALTON/STRING::|INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>|
+
+; disassembly for TEST-MAP-IO
+; Size: 25 bytes. Origin: #xB8010BBF86                        ; TEST-MAP-IO
+; 86:       488D051E000000   LEA RAX, [RIP+30]                ; #<FUNCTION (COMMON-LISP:FLET F-5345 :IN TEST-MAP-IO) {B8010BBFAB}>
+; 8D:       488B15BCFFFFFF   MOV RDX, [RIP-68]                ; "test"
+; 94:       B902000000       MOV ECX, 2
+; 99:       FF7508           PUSH QWORD PTR [RBP+8]
+; 9C:       FF60FD           JMP [RAX-3]
+
+; disassembly for TEST-MAP-IOT-IO
+; Size: 25 bytes. Origin: #xB8010CC866                        ; TEST-MAP-IOT-IO
+; 66:       488D051E000000   LEA RAX, [RIP+30]                ; #<FUNCTION (COMMON-LISP:FLET F-5347 :IN TEST-MAP-IOT-IO) {B8010CC88B}>
+; 6D:       488B15BCFFFFFF   MOV RDX, [RIP-68]                ; "test"
+; 74:       B902000000       MOV ECX, 2
+; 79:       FF7508           PUSH QWORD PTR [RBP+8]
+; 7C:       FF60FD           JMP [RAX-3]

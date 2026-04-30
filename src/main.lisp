@@ -8,6 +8,10 @@
 
 (named-readtables:in-readtable coalton:coalton)
 
+;;;
+;;; IO Type Definitions
+;;;
+
 (coalton-toplevel
   (repr :transparent)
   (define-type (IO :a)
@@ -79,6 +83,10 @@
          (>>= (runT! io-ma)
               (map runT! a->io-mb))))))
   )
+
+;;;
+;;; Test Simple Running
+;;;
 
 (coalton-toplevel
   ;; Compilation output: <none>
@@ -170,9 +178,84 @@
     (run-identity (Identity "test")))
  )
 
-;; (cl:disassemble 'test-direct)
-;; (cl:disassemble 'test-call-internal-lambda)
-;; (cl:disassemble 'test-run-io)
-;; (cl:disassemble 'test-run-ioT-identity)
-;; (cl:disassemble 'test-run-ioT-io)
-;; (cl:disassemble 'test-run-identity)
+;;;
+;;; Test Map
+;;;
+
+(coalton-toplevel
+
+  ;; Inlining method to application INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>
+  ;; Optimizing again, attempt #2
+  (declare test-direct-concat (Void -> String))
+  (define (test-direct-concat)
+    (<> "test" "concat"))
+  )
+
+(coalton-toplevel
+  ;; Inlining method to application INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>
+  ;; Optimizing again, attempt #2
+  (declare test-lambda-concat (Void -> String))
+  (define (test-lambda-concat)
+    (let g = (fn ()
+               (let f = (fn ()
+                          "test"))
+               (let do-concat = (fn (s)
+                                  (<> s "concat")))
+               (do-concat (f))))
+    (g))
+  )
+
+(coalton-toplevel
+  ;; Inlining method to application INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>
+  ;; Inlining method to application INSTANCE/FUNCTOR IO-COALTON/CLASSES:MAP
+  ;; Inlining global function INSTANCE/FUNCTOR IO-COALTON/CLASSES:MAP
+  ;; Inlining global function RUN!
+  ;; Optimizing again, attempt #2
+  (declare test-map-io (Void -> String))
+  (define (test-map-io)
+    (let f = (fn (s)
+               (<> s "concat")))
+    (run! (map f (IO (fn () "test")))))
+  )
+
+(coalton-toplevel
+  ;; Inlining method to application INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>
+  ;; Inlining method to application INSTANCE/FUNCTOR (IOT :M)-COALTON/CLASSES:MAP
+  ;; Inlining global function INSTANCE/FUNCTOR (IOT :M)-COALTON/CLASSES:MAP
+  ;; Inlining global function RUNT!
+  ;; Inlining global function RUN!
+  ;; Optimizing again, attempt #2
+  ;; Inlining direct method to application INSTANCE/FUNCTOR IO-COALTON/CLASSES:MAP
+  ;; Inlining global function INSTANCE/FUNCTOR IO-COALTON/CLASSES:MAP
+  ;; Optimizing again, attempt #3
+  (declare test-map-iot-io (Void -> String))
+  (define (test-map-iot-io)
+    (let f = (fn (s)
+               (<> s "concat")))
+    (run!
+     (runT! (map f
+                 (IoT (fn ()
+                        (IO (fn ()
+                              "test"))))))))
+    )
+
+
+;;;
+;;; Disassemble
+;;;
+
+(cl:defun disassemble-all-1 ()
+  (cl:disassemble 'test-direct)
+  (cl:disassemble 'test-call-internal-lambda)
+  (cl:disassemble 'test-run-io)
+  (cl:disassemble 'test-run-ioT-identity)
+  (cl:disassemble 'test-run-ioT-io)
+  (cl:disassemble 'test-run-identity))
+
+(cl:defun disassemble-all-2 ()
+  (cl:disassemble 'test-direct-concat)
+  (cl:disassemble 'test-lambda-concat)
+  (cl:disassemble 'test-map-io)
+  (cl:disassemble 'test-map-iot-io))
+
+(disassemble-all-2)
