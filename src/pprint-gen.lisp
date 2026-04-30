@@ -12,10 +12,10 @@
                                                      COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:FUNCTION-ENTRY)
   (DEFUN TEST-CALL-INTERNAL-LAMBDA ()
     (DECLARE (IGNORABLE))
-    (FLET ((F-54 ()
+    (FLET ((F-51 ()
              (DECLARE (IGNORABLE))
              "test"))
-      (F-54)))
+      (F-51)))
   (SETF TEST-CALL-INTERNAL-LAMBDA
           (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY :ARITY 0
                                                                     :FUNCTION
