@@ -1,0 +1,262 @@
+; disassembly for TEST-DIRECT
+; Size: 10 bytes. Origin: #xB8011FA326                        ; TEST-DIRECT
+; 26:       488B15D3FFFFFF   MOV RDX, [RIP-45]                ; "test"
+; 2D:       C9               LEAVE
+; 2E:       F8               CLC
+; 2F:       C3               RET
+
+; disassembly for TEST-CALL-INTERNAL-LAMBDA
+; Size: 10 bytes. Origin: #xB8011F5A96                        ; TEST-CALL-INTERNAL-LAMBDA
+; 96:       488B15D3FFFFFF   MOV RDX, [RIP-45]                ; "test"
+; 9D:       C9               LEAVE
+; 9E:       F8               CLC
+; 9F:       C3               RET
+
+; disassembly for TEST-RUN-IO
+; Size: 403 bytes. Origin: #xB8011C70E7                       ; TEST-RUN-IO
+; 0E7:       488D059D010000   LEA RAX, [RIP+413]              ; #<FUNCTION (COMMON-LISP:LAMBDA () :IN TEST-RUN-IO) {B8011C728B}>
+; 0EE:       488D5C24F0       LEA RBX, [RSP-16]
+; 0F3:       4883EC20         SUB RSP, 32
+; 0F7:       488B1562FFFFFF   MOV RDX, [RIP-158]              ; :ARITY
+; 0FE:       31FF             XOR EDI, EDI
+; 100:       BE6FE00150       MOV ESI, #x5001E06F             ; ':FUNCTION
+; 105:       488943F0         MOV [RBX-16], RAX
+; 109:       B908000000       MOV ECX, 8
+; 10E:       48892B           MOV [RBX], RBP
+; 111:       488BEB           MOV RBP, RBX
+; 114:       FF15E6AD94FE     CALL [RIP-23810586]             ; COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY
+; 11A:       488BC2           MOV RAX, RDX
+; 11D:       488B4805         MOV RCX, [RAX+5]
+; 121:       488BD1           MOV RDX, RCX
+; 124:       48D1FA           SAR RDX, 1
+; 127:       4885D2           TEST RDX, RDX
+; 12A:       0F85FF000000     JNE L10
+; 130:       4C8B500D         MOV R10, [RAX+13]
+; 134:       488B4815         MOV RCX, [RAX+21]
+; 138:       488BD1           MOV RDX, RCX
+; 13B:       4C8BC1           MOV R8, RCX
+; 13E:       31C0             XOR EAX, EAX
+; 140:       4D39E0           CMP R8, R12                     ; NIL
+; 143:       740D             JE L1
+; 145: L0:   4D8B4001         MOV R8, [R8+1]
+; 149:       4883C002         ADD RAX, 2
+; 14D:       4D39E0           CMP R8, R12                     ; NIL
+; 150:       75F3             JNE L0
+; 152: L1:   4883F808         CMP RAX, 8
+; 156:       770B             JA L2
+; 158:       4C8D0D41FFFFFF   LEA R9, [RIP-191]               ; = #xB8011C70A0
+; 15F:       41FF2481         JMP [R9+RAX*4]
+; 163: L2:   4C8955F8         MOV [RBP-8], R10
+; 167:       4883EC10         SUB RSP, 16
+; 16B:       498BFC           MOV RDI, R12                    ; NIL
+; 16E:       48892C24         MOV [RSP], RBP
+; 172:       488BEC           MOV RBP, RSP
+; 175:       FF15DD8F93FE     CALL [RIP-23883811]             ; SB-IMPL::APPEND2
+; 17B:       4C8B55F8         MOV R10, [RBP-8]
+; 17F:       488BF4           MOV RSI, RSP
+; 182: L3:   4C39E2           CMP RDX, R12                    ; NIL
+; 185:       7409             JE L4
+; 187:       FF72F9           PUSH QWORD PTR [RDX-7]
+; 18A:       488B5201         MOV RDX, [RDX+1]
+; 18E:       EBF2             JMP L3
+; 190: L4:   498BC2           MOV RAX, R10
+; 193:       E98899E3FE       JMP #xB800000B20                ; SB-C:TAIL-CALL-VARIABLE
+; 198: L5:   488B51F9         MOV RDX, [RCX-7]
+; 19C:       488B4101         MOV RAX, [RCX+1]
+; 1A0:       488B78F9         MOV RDI, [RAX-7]
+; 1A4:       488B4101         MOV RAX, [RCX+1]
+; 1A8:       488B4001         MOV RAX, [RAX+1]
+; 1AC:       488B70F9         MOV RSI, [RAX-7]
+; 1B0:       488B4101         MOV RAX, [RCX+1]
+; 1B4:       488B4001         MOV RAX, [RAX+1]
+; 1B8:       488B4001         MOV RAX, [RAX+1]
+; 1BC:       488B40F9         MOV RAX, [RAX-7]
+; 1C0:       488945F0         MOV [RBP-16], RAX
+; 1C4:       498BC2           MOV RAX, R10
+; 1C7:       B908000000       MOV ECX, 8
+; 1CC:       FF7508           PUSH QWORD PTR [RBP+8]
+; 1CF:       FF60FD           JMP [RAX-3]
+; 1D2: L6:   488B51F9         MOV RDX, [RCX-7]
+; 1D6:       488B4101         MOV RAX, [RCX+1]
+; 1DA:       488B78F9         MOV RDI, [RAX-7]
+; 1DE:       488B4101         MOV RAX, [RCX+1]
+; 1E2:       488B4001         MOV RAX, [RAX+1]
+; 1E6:       488B70F9         MOV RSI, [RAX-7]
+; 1EA:       498BC2           MOV RAX, R10
+; 1ED:       B906000000       MOV ECX, 6
+; 1F2:       FF7508           PUSH QWORD PTR [RBP+8]
+; 1F5:       FF60FD           JMP [RAX-3]
+; 1F8: L7:   488B51F9         MOV RDX, [RCX-7]
+; 1FC:       488B4101         MOV RAX, [RCX+1]
+; 200:       488B78F9         MOV RDI, [RAX-7]
+; 204:       498BC2           MOV RAX, R10
+; 207:       B904000000       MOV ECX, 4
+; 20C:       FF7508           PUSH QWORD PTR [RBP+8]
+; 20F:       FF60FD           JMP [RAX-3]
+; 212: L8:   488B51F9         MOV RDX, [RCX-7]
+; 216:       498BC2           MOV RAX, R10
+; 219:       B902000000       MOV ECX, 2
+; 21E:       FF7508           PUSH QWORD PTR [RBP+8]
+; 221:       FF60FD           JMP [RAX-3]
+; 224: L9:   498BC2           MOV RAX, R10
+; 227:       31C9             XOR ECX, ECX
+; 229:       FF7508           PUSH QWORD PTR [RBP+8]
+; 22C:       FF60FD           JMP [RAX-3]
+; 22F: L10:  488B153AFEFFFF   MOV RDX, [RIP-454]              ; 'COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:COALTON-FUNCTION-ARITY-MISMATCH
+; 236:       BF6FE00150       MOV EDI, #x5001E06F             ; ':FUNCTION
+; 23B:       488BF0           MOV RSI, RAX
+; 23E:       488B0533FEFFFF   MOV RAX, [RIP-461]              ; :EXPECTED-ARITY
+; 245:       488945F0         MOV [RBP-16], RAX
+; 249:       48894DE8         MOV [RBP-24], RCX
+; 24D:       488B052CFEFFFF   MOV RAX, [RIP-468]              ; :ACTUAL-ARITY
+; 254:       488945E0         MOV [RBP-32], RAX
+; 258:       48C745D800000000 MOV QWORD PTR [RBP-40], 0
+; 260:       48C745D09F530250 MOV QWORD PTR [RBP-48], #x5002539F  ; ':ARGUMENTS
+; 268:       4C8965C8         MOV [RBP-56], R12               ; NIL
+; 26C:       B912000000       MOV ECX, 18
+; 271:       FF7508           PUSH QWORD PTR [RBP+8]
+; 274:       FF25368F93FE     JMP [RIP-23883978]              ; COMMON-LISP:ERROR
+
+; disassembly for TEST-RUN-IOT-IDENTITY
+; Size: 80 bytes. Origin: #xB8011E05F6                        ; TEST-RUN-IOT-IDENTITY
+; 5F6:       488D055E000000   LEA RAX, [RIP+94]               ; #<FUNCTION (COMMON-LISP:LAMBDA () :IN TEST-RUN-IOT-IDENTITY) {B8011E065B}>
+; 5FD:       488D5C24F0       LEA RBX, [RSP-16]
+; 602:       4883EC20         SUB RSP, 32
+; 606:       488B15B3FFFFFF   MOV RDX, [RIP-77]               ; :ARITY
+; 60D:       31FF             XOR EDI, EDI
+; 60F:       BE6FE00150       MOV ESI, #x5001E06F             ; ':FUNCTION
+; 614:       488943F0         MOV [RBX-16], RAX
+; 618:       B908000000       MOV ECX, 8
+; 61D:       48892B           MOV [RBX], RBP
+; 620:       488BEB           MOV RBP, RBX
+; 623:       FF15D71893FE     CALL [RIP-23914281]             ; COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY
+; 629:       4883EC10         SUB RSP, 16
+; 62D:       B902000000       MOV ECX, 2
+; 632:       48892C24         MOV [RSP], RBP
+; 636:       488BEC           MOV RBP, RSP
+; 639:       FF15513E93FE     CALL [RIP-23904687]             ; RUNT!
+; 63F:       480F42E3         CMOVB RSP, RBX
+; 643:       C9               LEAVE
+; 644:       F8               CLC
+; 645:       C3               RET
+
+; disassembly for TEST-RUN-IOT-IO
+; Size: 429 bytes. Origin: #xB801205E27                       ; TEST-RUN-IOT-IO
+; E27:       488D05BD010000   LEA RAX, [RIP+445]              ; #<FUNCTION (COMMON-LISP:LAMBDA () :IN TEST-RUN-IOT-IO) {B801205FEB}>
+; E2E:       488D5C24F0       LEA RBX, [RSP-16]
+; E33:       4883EC20         SUB RSP, 32
+; E37:       488B1562FFFFFF   MOV RDX, [RIP-158]              ; :ARITY
+; E3E:       31FF             XOR EDI, EDI
+; E40:       BE6FE00150       MOV ESI, #x5001E06F             ; ':FUNCTION
+; E45:       488943F0         MOV [RBX-16], RAX
+; E49:       B908000000       MOV ECX, 8
+; E4E:       48892B           MOV [RBX], RBP
+; E51:       488BEB           MOV RBP, RBX
+; E54:       FF15A6C090FE     CALL [RIP-24067930]             ; COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY
+; E5A:       4883EC10         SUB RSP, 16
+; E5E:       B902000000       MOV ECX, 2
+; E63:       48892C24         MOV [RSP], RBP
+; E67:       488BEC           MOV RBP, RSP
+; E6A:       FF1520E690FE     CALL [RIP-24058336]             ; RUNT!
+; E70:       480F42E3         CMOVB RSP, RBX
+; E74:       488BC2           MOV RAX, RDX
+; E77:       488B4805         MOV RCX, [RAX+5]
+; E7B:       488BD1           MOV RDX, RCX
+; E7E:       48D1FA           SAR RDX, 1
+; E81:       4885D2           TEST RDX, RDX
+; E84:       0F85FF000000     JNE L10
+; E8A:       4C8B500D         MOV R10, [RAX+13]
+; E8E:       488B4815         MOV RCX, [RAX+21]
+; E92:       488BD1           MOV RDX, RCX
+; E95:       4C8BC1           MOV R8, RCX
+; E98:       31C0             XOR EAX, EAX
+; E9A:       4D39E0           CMP R8, R12                     ; NIL
+; E9D:       740D             JE L1
+; E9F: L0:   4D8B4001         MOV R8, [R8+1]
+; EA3:       4883C002         ADD RAX, 2
+; EA7:       4D39E0           CMP R8, R12                     ; NIL
+; EAA:       75F3             JNE L0
+; EAC: L1:   4883F808         CMP RAX, 8
+; EB0:       770B             JA L2
+; EB2:       4C8D0D27FFFFFF   LEA R9, [RIP-217]               ; = #xB801205DE0
+; EB9:       41FF2481         JMP [R9+RAX*4]
+; EBD: L2:   4C8955F8         MOV [RBP-8], R10
+; EC1:       4883EC10         SUB RSP, 16
+; EC5:       498BFC           MOV RDI, R12                    ; NIL
+; EC8:       48892C24         MOV [RSP], RBP
+; ECC:       488BEC           MOV RBP, RSP
+; ECF:       FF1583A28FFE     CALL [RIP-24141181]             ; SB-IMPL::APPEND2
+; ED5:       4C8B55F8         MOV R10, [RBP-8]
+; ED9:       488BF4           MOV RSI, RSP
+; EDC: L3:   4C39E2           CMP RDX, R12                    ; NIL
+; EDF:       7409             JE L4
+; EE1:       FF72F9           PUSH QWORD PTR [RDX-7]
+; EE4:       488B5201         MOV RDX, [RDX+1]
+; EE8:       EBF2             JMP L3
+; EEA: L4:   498BC2           MOV RAX, R10
+; EED:       E92EACDFFE       JMP #xB800000B20                ; SB-C:TAIL-CALL-VARIABLE
+; EF2: L5:   488B51F9         MOV RDX, [RCX-7]
+; EF6:       488B4101         MOV RAX, [RCX+1]
+; EFA:       488B78F9         MOV RDI, [RAX-7]
+; EFE:       488B4101         MOV RAX, [RCX+1]
+; F02:       488B4001         MOV RAX, [RAX+1]
+; F06:       488B70F9         MOV RSI, [RAX-7]
+; F0A:       488B4101         MOV RAX, [RCX+1]
+; F0E:       488B4001         MOV RAX, [RAX+1]
+; F12:       488B4001         MOV RAX, [RAX+1]
+; F16:       488B40F9         MOV RAX, [RAX-7]
+; F1A:       488945F0         MOV [RBP-16], RAX
+; F1E:       498BC2           MOV RAX, R10
+; F21:       B908000000       MOV ECX, 8
+; F26:       FF7508           PUSH QWORD PTR [RBP+8]
+; F29:       FF60FD           JMP [RAX-3]
+; F2C: L6:   488B51F9         MOV RDX, [RCX-7]
+; F30:       488B4101         MOV RAX, [RCX+1]
+; F34:       488B78F9         MOV RDI, [RAX-7]
+; F38:       488B4101         MOV RAX, [RCX+1]
+; F3C:       488B4001         MOV RAX, [RAX+1]
+; F40:       488B70F9         MOV RSI, [RAX-7]
+; F44:       498BC2           MOV RAX, R10
+; F47:       B906000000       MOV ECX, 6
+; F4C:       FF7508           PUSH QWORD PTR [RBP+8]
+; F4F:       FF60FD           JMP [RAX-3]
+; F52: L7:   488B51F9         MOV RDX, [RCX-7]
+; F56:       488B4101         MOV RAX, [RCX+1]
+; F5A:       488B78F9         MOV RDI, [RAX-7]
+; F5E:       498BC2           MOV RAX, R10
+; F61:       B904000000       MOV ECX, 4
+; F66:       FF7508           PUSH QWORD PTR [RBP+8]
+; F69:       FF60FD           JMP [RAX-3]
+; F6C: L8:   488B51F9         MOV RDX, [RCX-7]
+; F70:       498BC2           MOV RAX, R10
+; F73:       B902000000       MOV ECX, 2
+; F78:       FF7508           PUSH QWORD PTR [RBP+8]
+; F7B:       FF60FD           JMP [RAX-3]
+; F7E: L9:   498BC2           MOV RAX, R10
+; F81:       31C9             XOR ECX, ECX
+; F83:       FF7508           PUSH QWORD PTR [RBP+8]
+; F86:       FF60FD           JMP [RAX-3]
+; F89: L10:  488B1520FEFFFF   MOV RDX, [RIP-480]              ; 'COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:COALTON-FUNCTION-ARITY-MISMATCH
+; F90:       BF6FE00150       MOV EDI, #x5001E06F             ; ':FUNCTION
+; F95:       488BF0           MOV RSI, RAX
+; F98:       488B0519FEFFFF   MOV RAX, [RIP-487]              ; :EXPECTED-ARITY
+; F9F:       488945F0         MOV [RBP-16], RAX
+; FA3:       48894DE8         MOV [RBP-24], RCX
+; FA7:       488B0512FEFFFF   MOV RAX, [RIP-494]              ; :ACTUAL-ARITY
+; FAE:       488945E0         MOV [RBP-32], RAX
+; FB2:       48C745D800000000 MOV QWORD PTR [RBP-40], 0
+; FBA:       48C745D09F530250 MOV QWORD PTR [RBP-48], #x5002539F  ; ':ARGUMENTS
+; FC2:       4C8965C8         MOV [RBP-56], R12               ; NIL
+; FC6:       B912000000       MOV ECX, 18
+; FCB:       FF7508           PUSH QWORD PTR [RBP+8]
+; FCE:       FF25DCA18FFE     JMP [RIP-24141348]              ; COMMON-LISP:ERROR
+
+; disassembly for TEST-RUN-IDENTITY
+; Size: 20 bytes. Origin: #xB8011FA64B                        ; TEST-RUN-IDENTITY
+; 4B:       498B4510         MOV RAX, [R13+16]                ; thread.binding-stack-pointer
+; 4F:       488945F8         MOV [RBP-8], RAX
+; 53:       488B15C6FFFFFF   MOV RDX, [RIP-58]                ; "test"
+; 5A:       C9               LEAVE
+; 5B:       F8               CLC
+; 5C:       C3               RET
+; 5D:       CC0F             INT3 15                          ; Invalid argument count trap
