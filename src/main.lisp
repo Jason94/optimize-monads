@@ -172,7 +172,7 @@
 
 ;; (cl:disassemble 'test-direct)
 ;; (cl:disassemble 'test-call-internal-lambda)
-(cl:disassemble 'test-run-io)
+;; (cl:disassemble 'test-run-io)
 ;; (cl:disassemble 'test-run-ioT-identity)
 ;; (cl:disassemble 'test-run-ioT-io)
 ;; (cl:disassemble 'test-run-identity)
