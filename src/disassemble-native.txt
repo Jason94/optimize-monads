@@ -1,0 +1,10 @@
+; disassembly for TEST-RUN-IO
+; Size: 20 bytes. Origin: #xB8011EA06B                        ; TEST-RUN-IO
+; 6B:       498B4510         MOV RAX, [R13+16]                ; thread.binding-stack-pointer
+; 6F:       488945F8         MOV [RBP-8], RAX
+
+; 73:       488B15C6FFFFFF   MOV RDX, [RIP-58]                ; "test"
+; 7A:       C9               LEAVE
+; 7B:       F8               CLC
+; 7C:       C3               RET
+; 7D:       CC0F             INT3 15                          ; Invalid argument count trap
