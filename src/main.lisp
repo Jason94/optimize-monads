@@ -47,6 +47,7 @@
   (define-type (IoT :m :a)
     (IoT (Void -> :m :a)))
 
+  (inline)
   (declare runT! (IoT :m :a -> :m :a))
   (define (runT! (IoT funit->ma))
     (funit->ma))
@@ -80,31 +81,61 @@
   )
 
 (coalton-toplevel
+  ;; Compilation output: <none>
   (declare test-direct (Void -> String))
   (define (test-direct)
     "test")
+  )
 
+(coalton-toplevel
+  ;; Compilation output: <none>
   (declare test-call-internal-lambda (Void -> String))
   (define (test-call-internal-lambda)
     (let f = (fn () "test"))
     (f))
+  )
 
+(coalton-toplevel
+  ;; Compilation output:
+  ;; Inlining global function RUN!
+  ;; Optimizing again, attempt #2
   (declare test-run-io (Void -> String))
   (define (test-run-io)
     (run! (IO (fn () "test"))))
+  )
 
+(coalton-toplevel
+  ;; Compilation output:
+  ;; Inlining global function RUNT!
+  ;; Inlining global function RUN-IDENTITY
+  ;; Optimizing again, attempt #2
   (declare test-run-ioT-identity (Void -> String))
   (define (test-run-ioT-identity)
     (run-identity
      (runT! (IoT (fn ()
                    (Identity "test"))))))
+  )
 
+(coalton-toplevel
+  ;; Compilation output:
+  ;; Inlining global function RUNT!
+  ;; Inlining global function RUN!
+  ;; Optimizing again, attempt #2
   (declare test-run-ioT-io (Void -> String))
   (define (test-run-ioT-io)
     (run!
      (runT! (IoT (fn ()
                    (IO (fn ()
                          "test")))))))
+  )
+
+(coalton-toplevel
+  ;; Compilation output:
+  ;; Inlining global function RUN-IDENTITY
+  ;; Optimizing again, attempt #2
+  (declare test-run-identity (Void -> String))
+  (define (test-run-identity)
+    (run-identity (Identity "test")))
  )
 
 (pprint-coalton-codegen
@@ -133,4 +164,10 @@
      (runT! (IoT (fn ()
                    (IO (fn ()
                          "test")))))))
+
+  (declare test-run-identity (Void -> String))
+  (define (test-run-identity)
+    (run-identity (Identity "test")))
  )
+
+;; (cl:disassemble 'test-run-identity)
