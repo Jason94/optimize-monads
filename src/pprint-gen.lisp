@@ -1,134 +1,96 @@
 (PROGN
  (LOCALLY
   (DECLARE (OPTIMIZE (SB-C::TYPE-CHECK 0)))
-  (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-DIRECT
-                                                     COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:FUNCTION-ENTRY)
+  (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-DIRECT FUNCTION)
   (DEFUN TEST-DIRECT () (DECLARE (IGNORABLE)) "test")
-  (SETF TEST-DIRECT
-          (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY :ARITY 0
-                                                                    :FUNCTION
-                                                                    #'TEST-DIRECT))
+  (SETF TEST-DIRECT #'TEST-DIRECT)
   (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-CALL-INTERNAL-LAMBDA
-                                                     COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:FUNCTION-ENTRY)
+                                                     FUNCTION)
   (DEFUN TEST-CALL-INTERNAL-LAMBDA ()
     (DECLARE (IGNORABLE))
-    (FLET ((F-51 ()
+    (FLET ((F-5365 ()
              (DECLARE (IGNORABLE))
              "test"))
-      (F-51)))
-  (SETF TEST-CALL-INTERNAL-LAMBDA
-          (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY :ARITY 0
-                                                                    :FUNCTION
-                                                                    #'TEST-CALL-INTERNAL-LAMBDA))
-  (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-RUN-IO
-                                                     COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:FUNCTION-ENTRY)
+      (F-5365)))
+  (SETF TEST-CALL-INTERNAL-LAMBDA #'TEST-CALL-INTERNAL-LAMBDA)
+  (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-RUN-IO FUNCTION)
   (DEFUN TEST-RUN-IO ()
     (DECLARE (IGNORABLE))
-    (LET ((#:G926
-           (IO
-            (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY :ARITY 0
-                                                                      :FUNCTION
-                                                                      (LAMBDA
-                                                                          ()
-                                                                        (DECLARE
-                                                                         (IGNORABLE))
-                                                                        "test")))))
+    (LET ((#:G926 (IO (LAMBDA () (DECLARE (IGNORABLE)) "test"))))
       (DECLARE (IGNORABLE #:G926))
       (LET ((#:MATCH32 #:G926))
         (DECLARE (IGNORABLE #:MATCH32))
         (LOCALLY
          (DECLARE (SB-EXT:MUFFLE-CONDITIONS SB-EXT:CODE-DELETION-NOTE))
-         (LET ((FUNIT->A-27 #:MATCH32))
-           (DECLARE (IGNORABLE FUNIT->A-27))
-           (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:EXACT-CALL FUNIT->A-27))))))
-  (SETF TEST-RUN-IO
-          (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY :ARITY 0
-                                                                    :FUNCTION
-                                                                    #'TEST-RUN-IO))
+         (LET ((FUNIT->A-5317 #:MATCH32))
+           (DECLARE (IGNORABLE FUNIT->A-5317))
+           (FUNCALL FUNIT->A-5317))))))
+  (SETF TEST-RUN-IO #'TEST-RUN-IO)
   (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-RUN-IOT-IDENTITY
-                                                     COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:FUNCTION-ENTRY)
+                                                     FUNCTION)
   (DEFUN TEST-RUN-IOT-IDENTITY ()
     (DECLARE (IGNORABLE))
-    (LET ((#:G9028
+    (LET ((#:G428
            (LET ((#:G927
                   (IOT
-                   (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY
-                    :ARITY 0 :FUNCTION
-                    (LAMBDA ()
-                      (DECLARE (IGNORABLE))
-                      (COALTON/MONAD/IDENTITY:IDENTITY "test"))))))
+                   (LAMBDA ()
+                     (DECLARE (IGNORABLE))
+                     (COALTON/MONAD/IDENTITY:IDENTITY "test")))))
              (DECLARE (IGNORABLE #:G927))
              (LET ((#:MATCH34 #:G927))
                (DECLARE (IGNORABLE #:MATCH34))
                (LOCALLY
                 (DECLARE (SB-EXT:MUFFLE-CONDITIONS SB-EXT:CODE-DELETION-NOTE))
-                (LET ((FUNIT->MA-38 #:MATCH34))
-                  (DECLARE (IGNORABLE FUNIT->MA-38))
-                  (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:EXACT-CALL
-                   FUNIT->MA-38)))))))
-      (DECLARE (IGNORABLE #:G9028))
-      (LET ((#:MATCH33 #:G9028))
+                (LET ((FUNIT->MA-5328 #:MATCH34))
+                  (DECLARE (IGNORABLE FUNIT->MA-5328))
+                  (FUNCALL FUNIT->MA-5328)))))))
+      (DECLARE (IGNORABLE #:G428))
+      (LET ((#:MATCH33 #:G428))
         (DECLARE (IGNORABLE #:MATCH33))
         (LOCALLY
          (DECLARE (SB-EXT:MUFFLE-CONDITIONS SB-EXT:CODE-DELETION-NOTE))
-         (LET ((COALTON/MONAD/IDENTITY::A-2 #:MATCH33))
-           (DECLARE (IGNORABLE COALTON/MONAD/IDENTITY::A-2))
-           COALTON/MONAD/IDENTITY::A-2)))))
-  (SETF TEST-RUN-IOT-IDENTITY
-          (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY :ARITY 0
-                                                                    :FUNCTION
-                                                                    #'TEST-RUN-IOT-IDENTITY))
-  (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-RUN-IOT-IO
-                                                     COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:FUNCTION-ENTRY)
+         (LET ((COALTON/MONAD/IDENTITY::A-3750 #:MATCH33))
+           (DECLARE (IGNORABLE COALTON/MONAD/IDENTITY::A-3750))
+           COALTON/MONAD/IDENTITY::A-3750)))))
+  (SETF TEST-RUN-IOT-IDENTITY #'TEST-RUN-IOT-IDENTITY)
+  (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-RUN-IOT-IO FUNCTION)
   (DEFUN TEST-RUN-IOT-IO ()
     (DECLARE (IGNORABLE))
     (LET ((#:G930
            (LET ((#:G929
                   (IOT
-                   (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY
-                    :ARITY 0 :FUNCTION
-                    (LAMBDA ()
-                      (DECLARE (IGNORABLE))
-                      (IO
-                       (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY
-                        :ARITY 0 :FUNCTION
-                        (LAMBDA () (DECLARE (IGNORABLE)) "test"))))))))
+                   (LAMBDA ()
+                     (DECLARE (IGNORABLE))
+                     (IO (LAMBDA () (DECLARE (IGNORABLE)) "test"))))))
              (DECLARE (IGNORABLE #:G929))
              (LET ((#:MATCH36 #:G929))
                (DECLARE (IGNORABLE #:MATCH36))
                (LOCALLY
                 (DECLARE (SB-EXT:MUFFLE-CONDITIONS SB-EXT:CODE-DELETION-NOTE))
-                (LET ((FUNIT->MA-38 #:MATCH36))
-                  (DECLARE (IGNORABLE FUNIT->MA-38))
-                  (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:EXACT-CALL
-                   FUNIT->MA-38)))))))
+                (LET ((FUNIT->MA-5328 #:MATCH36))
+                  (DECLARE (IGNORABLE FUNIT->MA-5328))
+                  (FUNCALL FUNIT->MA-5328)))))))
       (DECLARE (IGNORABLE #:G930))
       (LET ((#:MATCH35 #:G930))
         (DECLARE (IGNORABLE #:MATCH35))
         (LOCALLY
          (DECLARE (SB-EXT:MUFFLE-CONDITIONS SB-EXT:CODE-DELETION-NOTE))
-         (LET ((FUNIT->A-27 #:MATCH35))
-           (DECLARE (IGNORABLE FUNIT->A-27))
-           (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:EXACT-CALL FUNIT->A-27))))))
-  (SETF TEST-RUN-IOT-IO
-          (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY :ARITY 0
-                                                                    :FUNCTION
-                                                                    #'TEST-RUN-IOT-IO))
+         (LET ((FUNIT->A-5317 #:MATCH35))
+           (DECLARE (IGNORABLE FUNIT->A-5317))
+           (FUNCALL FUNIT->A-5317))))))
+  (SETF TEST-RUN-IOT-IO #'TEST-RUN-IOT-IO)
   (COALTON-IMPL/GLOBAL-LEXICAL:DEFINE-GLOBAL-LEXICAL TEST-RUN-IDENTITY
-                                                     COALTON-IMPL/RUNTIME/FUNCTION-ENTRY:FUNCTION-ENTRY)
+                                                     FUNCTION)
   (DEFUN TEST-RUN-IDENTITY ()
     (DECLARE (IGNORABLE))
-    (LET ((#:G9031 (COALTON/MONAD/IDENTITY:IDENTITY "test")))
-      (DECLARE (IGNORABLE #:G9031))
-      (LET ((#:MATCH37 #:G9031))
+    (LET ((#:G431 (COALTON/MONAD/IDENTITY:IDENTITY "test")))
+      (DECLARE (IGNORABLE #:G431))
+      (LET ((#:MATCH37 #:G431))
         (DECLARE (IGNORABLE #:MATCH37))
         (LOCALLY
          (DECLARE (SB-EXT:MUFFLE-CONDITIONS SB-EXT:CODE-DELETION-NOTE))
-         (LET ((COALTON/MONAD/IDENTITY::A-2 #:MATCH37))
-           (DECLARE (IGNORABLE COALTON/MONAD/IDENTITY::A-2))
-           COALTON/MONAD/IDENTITY::A-2)))))
-  (SETF TEST-RUN-IDENTITY
-          (COALTON-IMPL/RUNTIME/FUNCTION-ENTRY::MAKE-FUNCTION-ENTRY :ARITY 0
-                                                                    :FUNCTION
-                                                                    #'TEST-RUN-IDENTITY)))
+         (LET ((COALTON/MONAD/IDENTITY::A-3750 #:MATCH37))
+           (DECLARE (IGNORABLE COALTON/MONAD/IDENTITY::A-3750))
+           COALTON/MONAD/IDENTITY::A-3750)))))
+  (SETF TEST-RUN-IDENTITY #'TEST-RUN-IDENTITY))
  (VALUES))

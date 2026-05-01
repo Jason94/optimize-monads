@@ -14,6 +14,25 @@
 ; D9:       FF7508           PUSH QWORD PTR [RBP+8]
 ; DC:       FF256E9CA4FE     JMP [RIP-22766482]               ; COALTON/STRING::|INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>|
 
+; disassembly for TEST-PASS-LAMBDA-CONCAT
+; Size: 25 bytes. Origin: #xB8010A0176                        ; TEST-PASS-LAMBDA-CONCAT
+; 76:       488D051E000000   LEA RAX, [RIP+30]                ; #<FUNCTION (COMMON-LISP:FLET DO-CONCAT-5411 :IN TEST-PASS-LAMBDA-CONCAT) {B8010A019B}>
+; 7D:       488B15BCFFFFFF   MOV RDX, [RIP-68]                ; "test"
+; 84:       B902000000       MOV ECX, 2
+; 89:       FF7508           PUSH QWORD PTR [RBP+8]
+; 8C:       FF60FD           JMP [RAX-3]
+
+; disassembly for TEST-CL-PASS-LAMBDA-CONCAT
+; Size: 38 bytes. Origin: #xB80109333B                        ; TEST-CL-PASS-LAMBDA-CONCAT
+; 3B:       498B4510         MOV RAX, [R13+16]                ; thread.binding-stack-pointer
+; 3F:       488945F8         MOV [RBP-8], RAX
+; 43:       488B15B6FFFFFF   MOV RDX, [RIP-74]                ; "test"
+; 4A:       488B3DB7FFFFFF   MOV RDI, [RIP-73]                ; "concat"
+; 51:       B904000000       MOV ECX, 4
+; 56:       FF7508           PUSH QWORD PTR [RBP+8]
+; 59:       FF25D9A5A7FE     JMP [RIP-22567463]               ; SB-KERNEL:%CONCATENATE-TO-STRING
+; 5F:       CC0F             INT3 15                          ; Invalid argument count trap
+
 ; disassembly for TEST-MAP-IO
 ; Size: 25 bytes. Origin: #xB8010BBF86                        ; TEST-MAP-IO
 ; 86:       488D051E000000   LEA RAX, [RIP+30]                ; #<FUNCTION (COMMON-LISP:FLET F-5345 :IN TEST-MAP-IO) {B8010BBFAB}>

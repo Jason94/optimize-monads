@@ -207,6 +207,25 @@
 
 (coalton-toplevel
   ;; Inlining method to application INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>
+  ;; Optimizing again, attempt #2
+  (declare test-pass-lambda-concat (Void -> String))
+  (define (test-pass-lambda-concat)
+    (let do-concat = (fn (s)
+                       (<> s "concat")))
+    (let apply-to-test = (fn (f)
+                           (f "test")))
+    (apply-to-test do-concat))
+  )
+
+(cl:defun test-cl-pass-lambda-concat ()
+  (cl:let* ((do-concat (cl:lambda (s)
+                         (cl:concatenate 'cl:string s "concat")))
+            (apply-to-test (cl:lambda (f)
+                             (cl:funcall f "test"))))
+    (cl:funcall apply-to-test do-concat)))
+
+(coalton-toplevel
+  ;; Inlining method to application INSTANCE/SEMIGROUP STRING-COALTON/CLASSES:<>
   ;; Inlining method to application INSTANCE/FUNCTOR IO-COALTON/CLASSES:MAP
   ;; Inlining global function INSTANCE/FUNCTOR IO-COALTON/CLASSES:MAP
   ;; Inlining global function RUN!
@@ -239,6 +258,64 @@
                               "test"))))))))
     )
 
+(pprint-coalton-codegen
+
+  (declare test-direct-concat (Void -> String))
+  (define (test-direct-concat)
+    (<> "test" "concat"))
+
+  (declare test-lambda-concat (Void -> String))
+  (define (test-lambda-concat)
+    (let g = (fn ()
+               (let f = (fn ()
+                          "test"))
+               (let do-concat = (fn (s)
+                                  (<> s "concat")))
+               (do-concat (f))))
+    (g))
+
+  (declare test-pass-lambda-concat (Void -> String))
+  (define (test-pass-lambda-concat)
+    (let do-concat = (fn (s)
+                       (<> s "concat")))
+    (let apply-to-test = (fn (f)
+                           (f "test")))
+    (apply-to-test do-concat))
+
+  (declare test-map-io (Void -> String))
+  (define (test-map-io)
+    (let f = (fn (s)
+               (<> s "concat")))
+    (run! (map f (IO (fn () "test")))))
+
+  (declare test-map-iot-io (Void -> String))
+  (define (test-map-iot-io)
+    (let f = (fn (s)
+               (<> s "concat")))
+    (run!
+     (runT! (map f
+                 (IoT (fn ()
+                        (IO (fn ()
+                              "test"))))))))
+    )
+
+;;;
+;;; Bind
+;;;
+
+(coalton-toplevel
+  (declare test-bind-io (Void -> String))
+  (define (test-bind-io)
+    (run! (>>= (pure "test")
+               (fn (s)
+                 (pure (<> s "concat")))))))
+
+(pprint-coalton-codegen
+  (declare test-bind-io (Void -> String))
+  (define (test-bind-io)
+    (run! (>>= (pure "test")
+               (fn (s)
+                 (pure (<> s "concat")))))))
 
 ;;;
 ;;; Disassemble
@@ -255,7 +332,12 @@
 (cl:defun disassemble-all-2 ()
   (cl:disassemble 'test-direct-concat)
   (cl:disassemble 'test-lambda-concat)
+  (cl:disassemble 'test-pass-lambda-concat)
+  (cl:disassemble 'test-cl-pass-lambda-concat)
   (cl:disassemble 'test-map-io)
   (cl:disassemble 'test-map-iot-io))
 
-(disassemble-all-2)
+(cl:defun disassemble-all-3 ()
+  (cl:disassemble 'test-bind-io))
+
+;; (disassemble-all-3)
