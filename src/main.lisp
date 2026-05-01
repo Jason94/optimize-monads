@@ -308,14 +308,30 @@
   (define (test-bind-io)
     (run! (>>= (pure "test")
                (fn (s)
-                 (pure (<> s "concat")))))))
+                 (pure (<> s "concat"))))))
+
+  (declare test-bind-iot-io (Void -> String))
+  (define (test-bind-iot-io)
+    (run!
+     (runT! (>>= (pure "test")
+                 (fn (s)
+                   (pure (<> s "concat")))))))
+  )
 
 (pprint-coalton-codegen
   (declare test-bind-io (Void -> String))
   (define (test-bind-io)
     (run! (>>= (pure "test")
                (fn (s)
-                 (pure (<> s "concat")))))))
+                 (pure (<> s "concat"))))))
+
+  (declare test-bind-iot-io (Void -> String))
+  (define (test-bind-iot-io)
+    (run!
+     (runT! (>>= (pure "test")
+                 (fn (s)
+                   (pure (<> s "concat")))))))
+  )
 
 ;;;
 ;;; Disassemble
@@ -338,6 +354,7 @@
   (cl:disassemble 'test-map-iot-io))
 
 (cl:defun disassemble-all-3 ()
-  (cl:disassemble 'test-bind-io))
+  (cl:disassemble 'test-bind-io)
+  (cl:disassemble 'test-bind-iot-io))
 
-;; (disassemble-all-3)
+(disassemble-all-3)
