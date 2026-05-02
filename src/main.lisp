@@ -309,7 +309,19 @@
     (run! (>>= (pure "test")
                (fn (s)
                  (pure (<> s "concat"))))))
+  )
 
+(coalton-toplevel
+
+  (declare test-bind-iot-ident (Void -> String))
+  (define (test-bind-iot-ident)
+    (run-identity
+     (runT! (>>= (pure "test")
+                 (fn (s)
+                   (pure (<> s "concat")))))))
+  )
+
+(coalton-toplevel
   (declare test-bind-iot-io (Void -> String))
   (define (test-bind-iot-io)
     (run!
@@ -319,11 +331,22 @@
   )
 
 (pprint-coalton-codegen
+;; (coalton-codegen-ast
   (declare test-bind-io (Void -> String))
   (define (test-bind-io)
     (run! (>>= (pure "test")
                (fn (s)
                  (pure (<> s "concat"))))))
+
+  (declare test-bind-iot-ident (Void -> String))
+  (define (test-bind-iot-ident)
+    (run-identity
+     (runT! (>>= (pure "test")
+                 (fn (s)
+                   (pure (<> s "concat")))))))
+  )
+
+(coalton-codegen-ast
 
   (declare test-bind-iot-io (Void -> String))
   (define (test-bind-iot-io)
@@ -355,6 +378,7 @@
 
 (cl:defun disassemble-all-3 ()
   (cl:disassemble 'test-bind-io)
+  (cl:disassemble 'test-bind-iot-ident)
   (cl:disassemble 'test-bind-iot-io))
 
 (disassemble-all-3)
