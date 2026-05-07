@@ -1,5 +1,7 @@
 (cl:defpackage #:optimize-monads
   (:use #:coalton #:coalton-prelude #:coalton/monad/identity)
+  (:local-nicknames
+   (:c #:coalton/cell))
   )
 
 (cl:in-package #:optimize-monads)
@@ -337,6 +339,9 @@
     (run! (>>= (pure "test")
                (fn (s)
                  (pure (<> s "concat"))))))
+  )
+
+(coalton-codegen-ast
 
   (declare test-bind-iot-ident (Void -> String))
   (define (test-bind-iot-ident)
@@ -354,6 +359,29 @@
      (runT! (>>= (pure "test")
                  (fn (s)
                    (pure (<> s "concat")))))))
+  )
+
+;;;
+;;; Test Looping
+;;;
+
+(coalton-toplevel
+
+  (declare test-loop-for (Void -> Integer))
+  (define (test-loop-for)
+    (rec % ((i 0))
+      (if (< i 10)
+          (% (1+ i))
+          i)))
+
+  (declare test-loop-do (Void -> Integer))
+  (define (test-loop-do)
+    (run!
+     (do
+      (rec % ((i 0))
+        (if (< i 10)
+            (% (1+ i))
+            (pure i))))))
   )
 
 ;;;
@@ -381,4 +409,8 @@
   (cl:disassemble 'test-bind-iot-ident)
   (cl:disassemble 'test-bind-iot-io))
 
-(disassemble-all-3)
+(cl:defun disassemble-all-4 ()
+  (cl:disassemble 'test-loop-for)
+  (cl:disassemble 'test-loop-do))
+
+(disassemble-all-4)
